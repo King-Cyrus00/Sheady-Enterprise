@@ -4,7 +4,7 @@ import "@fontsource/montserrat";
 import logo from "../images/sheady-logo.png";
 import { Link, useNavigate, useLocation } from "react-router";
 import { CartContext } from "../Content/Cart";
-import CartModal from "../components/CartModal"; // ✅ Import modal
+import CartModal from "../components/CartModal"; 
 import soap from "../images/soap.jpg";
 import skin from "../images/skin.jpg";  
 import hair from "../images/hair.jpg";
@@ -36,7 +36,7 @@ const categories = [
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false); // ✅ Modal state
+  const [isCartOpen, setIsCartOpen] = useState(false); 
   const { cartCount } = useContext(CartContext);
   const navigate = useNavigate();
 

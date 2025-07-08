@@ -7,9 +7,9 @@ import Testimony from "../components/Testimony";
 import HomeProducts from "../components/Homeproduct";
 import { FaArrowUp } from "react-icons/fa";
 
-
 const Home = () => {
   const [showTopBtn, setShowTopBtn] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,9 +19,22 @@ const Home = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen bg-white">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-[#ec8733] border-opacity-50"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full bg-white font-[Montserrat] relative overflow-x-hidden">
@@ -64,9 +77,7 @@ const Home = () => {
           <FaArrowUp />
         </button>
       )}
-
     </div>
-
   );
 };
 
