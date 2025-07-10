@@ -1,6 +1,6 @@
 // ContactPage.jsx
 import React, { useState } from "react";
-import { FaFacebookF, FaInstagram, FaTwitter, FaWhatsapp } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaTiktok, FaWhatsapp } from "react-icons/fa";
 import contactImg from "../images/contact.jpg";
 import "@fontsource/montserrat";
 import Navbar from "../components/Navbar";
@@ -61,7 +61,7 @@ const ContactPage = () => {
               </div>
             ) : (
               <form
-                action="https://formspree.io/f/your-form-id" // Replace with actual Formspree ID
+                action="https://formspree.io/f/xanjrnbk"
                 method="POST"
                 onSubmit={handleSubmit}
                 className="space-y-5 bg-white p-6 rounded-xl shadow-md border border-[#f2e8e2]"
@@ -88,17 +88,6 @@ const ContactPage = () => {
                   className="w-full px-5 py-3 border border-[#ec8733]/40 rounded-md focus:ring-2 focus:ring-[#ec8733] focus:outline-none text-[#1b5059] placeholder:text-[#1b5059]/60 bg-[#fffaf7]"
                 ></textarea>
 
-                <div className="flex items-start gap-3">
-                  <input
-                    type="checkbox"
-                    required
-                    className="mt-1 accent-[#ec8733]"
-                  />
-                  <p className="text-sm text-[#1b5059]">
-                    I agree to the terms and conditions.
-                  </p>
-                </div>
-
                 <button
                   type="submit"
                   className="bg-[#ec8733] text-white font-semibold px-8 py-3 rounded-full hover:bg-[#d86620] transition w-fit shadow-lg"
@@ -109,24 +98,24 @@ const ContactPage = () => {
             )}
 
             <div className="mt-8 space-y-2 text-sm text-[#1b5059]">
-              <p><strong>Address:</strong> 123 Shea Street, Accra, Ghana</p>
-              <p><strong>Email:</strong> info@sheady.com</p>
+              <p><strong>Address:</strong>Sarbonjida, around IK photos, Tamale.</p>
+              <p><strong>Email:</strong> sheadyenterprise@gmail.com</p>
               <p><strong>Phone:</strong> +233 54 043 5713</p>
             </div>
 
             <div className="mt-6">
               <p className="text-sm text-[#1b5059] mb-2 font-medium">Follow us</p>
               <div className="flex gap-4 text-[#1b5059] text-lg">
-                <a href="#" className="hover:text-[#ec8733] transition">
+                <a href="https://www.facebook.com/profile.php?id=100064733420450" target="_blank" rel="noopener noreferrer" className="hover:text-[#ec8733] transition">
                   <FaFacebookF />
                 </a>
-                <a href="#" className="hover:text-[#ec8733] transition">
+                <a href="https://www.instagram.com/sheadycosmeticsgh1?igsh=0GQ5Zdc20Dk2ZA==" target="_blank" rel="noopener noreferrer" className="hover:text-[#ec8733] transition">
                   <FaInstagram />
                 </a>
-                <a href="#" className="hover:text-[#ec8733] transition">
-                  <FaTwitter />
+                <a href="https://www.tiktok.com/@sheadymade.com?_t=ZS-8u55ACuSbgo&_r=1" target="_blank" rel="noopener noreferrer" className="hover:text-[#ec8733] transition">
+                  <FaTiktok />
                 </a>
-                <a href="#" className="hover:text-[#ec8733] transition">
+                <a href="https://wa.me/+233540435713" target="_blank" rel="noopener noreferrer" className="hover:text-[#ec8733] transition">
                   <FaWhatsapp />
                 </a>
               </div>

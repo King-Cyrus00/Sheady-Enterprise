@@ -2,17 +2,16 @@
 import React from "react";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
-import team1 from "../images/soap.jpg";
-import team2 from "../images/soap.jpg";
-import team3 from "../images/soap.jpg";
-import team4 from "../images/soap.jpg";
+import team1 from "../images/shashadu.jpg";
+import team2 from "../images/moha.jpg";
+import team4 from "../images/sheri.jpg";
 import about1 from "../images/soap.jpg";
 import about2 from "../images/soap.jpg";
-import about3 from "../images/soap.jpg";
 import "@fontsource/montserrat";
 import Testimonial from "../components/Testimony";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Vid from "../images/vid.mp4";
 
 const About = () => {
   return (
@@ -45,6 +44,31 @@ const About = () => {
             >
               Contact Us
             </Link>
+          </div>
+        </div>
+
+        {/* Product Highlights */}
+        <div className="bg-white py-16 px-6">
+          <div className="max-w-6xl mx-auto text-center">
+            <motion.h3
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-2xl font-bold mb-6"
+            >
+              Crafted With Nature's Best
+            </motion.h3>
+            <p className="text-gray-600 mb-10 text-sm max-w-2xl mx-auto">
+              Every Sheady product is made from raw shea butter, neem leaves, sunflower oil, honey, carrot oil, and coconut oil—blended gently over low heat to retain potency.
+            </p>
+            <video
+              controls
+              className="w-full max-h-[420px] rounded-xl shadow-md border border-[#ec8733] hover:shadow-xl transition duration-500 object-cover"
+            >
+              <source src={Vid} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+
           </div>
         </div>
 
@@ -94,41 +118,16 @@ const About = () => {
           </div>
         </div>
 
-        {/* Product Highlights */}
-        <div className="bg-white py-16 px-6">
-          <div className="max-w-6xl mx-auto text-center">
-            <motion.h3
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-2xl font-bold mb-6"
-            >
-              Crafted With Nature's Best
-            </motion.h3>
-            <p className="text-gray-600 mb-10 text-sm max-w-2xl mx-auto">
-              Every Sheady product is made from raw shea butter, neem leaves, sunflower oil, honey, carrot oil, and coconut oil—blended gently over low heat to retain potency.
-            </p>
-            <motion.img
-              src={about3}
-              alt="Sheady Ingredients"
-              className="w-full rounded-xl shadow-md object-cover"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.7 }}
-            />
-          </div>
-        </div>
         <Testimonial />
 
         {/* Team Section */}
         <div className="bg-[#fdf6f0] py-20 px-6">
           <div className="max-w-6xl mx-auto text-center">
             <h3 className="text-3xl font-bold mb-10 text-[#1b5059]">Meet Our Team</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
               {[
                 { name: "Shahadu Abdul Ganiu", role: "Marketing Lead", img: team1 },
                 { name: "Abdullah Mohammed", role: "Media & Graphics", img: team2 },
-                { name: "Alhassan Mariama", role: "Finance Lead", img: team3 },
                 { name: "Fuseini Sherifa", role: "Production Lead", img: team4 },
               ].map((member, index) => (
                 <motion.div
@@ -136,20 +135,21 @@ const About = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="text-center"
+                  className="flex flex-col items-center text-center"
                 >
                   <img
                     src={member.img}
                     alt={member.name}
-                    className="w-32 h-32 object-cover rounded-full mx-auto mb-3 border-4 border-[#1b5059]"
+                    className="w-36 h-36 object-cover rounded-full border-4 border-[#1b5059] shadow-md hover:scale-105 transition-transform duration-300"
                   />
-                  <p className="font-semibold text-[#1b5059] text-sm">{member.name}</p>
+                  <p className="mt-3 font-semibold text-[#1b5059] text-sm">{member.name}</p>
                   <p className="text-xs text-gray-500">{member.role}</p>
                 </motion.div>
               ))}
             </div>
           </div>
         </div>
+
       </section>
       <Footer />
     </>

@@ -4,11 +4,13 @@ import { Link } from "react-router";
 import {
   FaFacebookF,
   FaInstagram,
-  FaTwitter,
+  FaTiktok,
   FaWhatsapp,
+  FaPhoneAlt,
 } from "react-icons/fa";
 import logo from "../images/f-logo.png";
 import "@fontsource/montserrat";
+import { AiTwotoneMail } from "react-icons/ai";
 
 const Footer = () => {
   return (
@@ -25,8 +27,8 @@ const Footer = () => {
             Discover the healing power of nature with Sheady’s pure skincare and haircare solutions.
           </p>
           <div className="text-sm space-y-1">
-            <p>📞 +233 54 043 5713</p>
-            <p>📧 info@sheadycosmetics.com</p>
+            <p><FaPhoneAlt /> +233 54 043 5713</p>
+            <p><AiTwotoneMail /> sheadyenterprise@gmail.com</p>
           </div>
         </div>
 
@@ -56,10 +58,10 @@ const Footer = () => {
         <div>
           <h4 className="text-lg font-semibold mb-4">Connect With Us</h4>
           <div className="flex gap-4 text-xl mb-4">
-            <a href="#" className="hover:text-[#ec8733] transition"><FaFacebookF /></a>
-            <a href="#" className="hover:text-[#ec8733] transition"><FaInstagram /></a>
-            <a href="#" className="hover:text-[#ec8733] transition"><FaTwitter /></a>
-            <a href="#" className="hover:text-[#ec8733] transition"><FaWhatsapp /></a>
+            <a href="https://www.facebook.com/profile.php?id=100064733420450" target="_blank" rel="noopener noreferrer" className="hover:text-[#ec8733] transition"><FaFacebookF /></a>
+            <a href="https://www.instagram.com/sheadycosmeticsgh1?igsh=0GQ5Zdc20Dk2ZA==" target="_blank" rel="noopener noreferrer" className="hover:text-[#ec8733] transition"><FaInstagram /></a>
+            <a href="https://www.tiktok.com/@sheadymade.com?_t=ZS-8u55ACuSbgo&_r=1" target="_blank" rel="noopener noreferrer" className="hover:text-[#ec8733] transition"><FaTiktok /></a>
+            <a href="https://wa.me/233540435713" target="_blank" rel="noopener noreferrer" className="hover:text-[#ec8733] transition"><FaWhatsapp /></a>
           </div>
           <Link
             to="/contact"

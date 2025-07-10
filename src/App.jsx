@@ -2,6 +2,10 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router";
+import { ToastContainer } from "react-toastify";
+
+
+
 
 
 import Home from "./assets/pages/Home";
@@ -23,6 +27,7 @@ export default function App() {
   return (
     <>
       <RouterProvider router={sheadyRouter} />
+      <ToastContainer />
     </>
   )
 }
