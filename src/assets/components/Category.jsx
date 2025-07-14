@@ -20,7 +20,7 @@ const categories = [
     description: "Nourish and define healthy hair.",
   },
   {
-    title: "Fragrance",
+    title: "Soap",
     image: soap,
     link: "/product?category=Soap",
     description: "Gentle cleansing with pure botanicals.",
