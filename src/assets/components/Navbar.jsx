@@ -27,7 +27,7 @@ const Navbar = () => {
   }, [location.pathname]);
 
   return (
-    <header className="w-full bg-white shadow-sm font-[Montserrat] relative z-50 sticky top-0">
+    <header className="w-full bg-white shadow-sm font-[Montserrat] z-50 sticky top-0">
       {/* Top Bar */}
       <div className="bg-[#f9f4f0] text-sm text-gray-700 px-6 py-2 flex justify-between items-center">
         <div className="text-gray-600">Sophistication Meets Uncompromised Elegance</div>
