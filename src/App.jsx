@@ -1,12 +1,6 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router";
+import { createBrowserRouter, RouterProvider } from "react-router";
 import { ToastContainer } from "react-toastify";
-
-
-
-
+import ScrollToTop from './assets/components/ScrollToTop';
 
 import Home from "./assets/pages/Home";
 import About from "./assets/pages/About";
@@ -15,15 +9,49 @@ import Product from "./assets/pages/Product";
 import ErrorPage from "./assets/pages/ErrorPage";
 
 const sheadyRouter = createBrowserRouter([
-  { path: "/", element: <Home /> },
-  { path: "/about", element: <About /> },
-  { path: "/contact", element: <Contact /> },
-  { path: "/product", element: <Product /> },
-  { path: "*", element: <ErrorPage /> },
+  { 
+    path: "/", 
+    element: (
+      <>
+        <ScrollToTop />
+        <Home />
+      </>
+    ) 
+  },
+  { 
+    path: "/about", 
+    element: (
+      <>
+        <ScrollToTop />
+        <About />
+      </>
+    ) 
+  },
+  { 
+    path: "/contact", 
+    element: (
+      <>
+        <ScrollToTop />
+        <Contact />
+      </>
+    ) 
+  },
+  { 
+    path: "/product", 
+    element: (
+      <>
+        <ScrollToTop />
+        <Product />
+      </>
+    ) 
+  },
+  { 
+    path: "*", 
+    element: <ErrorPage /> 
+  },
 ]);
 
 export default function App() {
-
   return (
     <>
       <RouterProvider router={sheadyRouter} />

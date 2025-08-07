@@ -5,7 +5,7 @@ import { Link } from "react-router";
 
 const HeroSection = () => {
   return (
-    <section className="w-full font-[Montserrat] mb-16">
+    <section className="w-full font-[Montserrat] mb-8">
       <div className="grid grid-cols-1 md:grid-cols-3 min-h-[75vh] md:min-h-[90vh]">
         {/* Left Image */}
         <div className="h-full w-full">
@@ -36,7 +36,7 @@ const HeroSection = () => {
             {/* Shop Now Button */}
             <Link
               to="/product"
-              className="group relative inline-flex items-center px-6 py-2 text-[#1b5059] font-semibold bg-white rounded-full overflow-hidden shadow-md hover:shadow-lg transition-all animate-pulse"
+              className="group relative inline-flex items-center px-6 py-2 text-[#1b5059] font-semibold bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg transition-all animate-pulse"
             >
               <span className="absolute inset-0 bg-[#1b5059] w-0 group-hover:w-full transition-all duration-300 ease-in-out"></span>
               <span className="relative group-hover:text-white z-10">Shop Now</span>

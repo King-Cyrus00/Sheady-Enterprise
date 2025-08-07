@@ -1,4 +1,3 @@
-// About.jsx
 import React from "react";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
@@ -15,116 +14,220 @@ import Vid from "../images/vid.mp4";
 
 const About = () => {
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <Navbar />
-      <section className="w-full bg-[#fdf6f0] text-[#1b5059] font-[Montserrat]">
-        {/* Hero */}
-        <div className="max-w-7xl mx-auto px-6 py-16 text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-4xl font-bold mb-4"
-          >
-            Be Confident In Your Skin
-          </motion.h2>
-          <p className="text-lg max-w-2xl mx-auto text-gray-600">
-            At Sheady, we believe in restoring beauty naturally. Our organic products heal, protect, and nourish skin and hair without a single drop of chemicals.
-          </p>
-          <div className="flex justify-center mt-8 gap-4">
-            <Link
-              to="/product"
-              className="bg-[#ec8733] text-white px-6 py-2 rounded-full hover:bg-[#d86620] transition"
-            >
-              Explore Products
-            </Link>
-            <Link
-              to="/contact"
-              className="border border-[#ec8733] text-[#ec8733] px-6 py-2 rounded-full hover:bg-[#ec8733] hover:text-white transition"
-            >
-              Contact Us
-            </Link>
-          </div>
-        </div>
-
-        {/* Product Highlights */}
-        <div className="bg-white py-16 px-6">
-          <div className="max-w-6xl mx-auto text-center">
-            <motion.h3
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+      
+      <main className="flex-grow bg-white">
+        {/* Hero Section */}
+        <section className="relative bg-gradient-to-r from-[#1b5059] to-[#0d2e34] text-white py-24">
+          <div className="max-w-7xl mx-auto px-6 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-2xl font-bold mb-6"
             >
-              Crafted With Nature's Best
-            </motion.h3>
-            <p className="text-gray-600 mb-10 text-sm max-w-2xl mx-auto">
-              Every Sheady product is made from raw shea butter, neem leaves, sunflower oil, honey, carrot oil, and coconut oil—blended gently over low heat to retain potency.
-            </p>
-            <video
-              controls
-              className="w-full max-h-[420px] rounded-xl shadow-md border border-[#ec8733] hover:shadow-xl transition duration-500 object-cover"
-            >
-              <source src={Vid} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-
-          </div>
-        </div>
-
-        {/* Problems & Solutions */}
-        <div className="bg-white py-16 px-6">
-          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
-            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6 }}>
-              <img src={about1} alt="Natural Care" className="rounded-xl shadow-md w-full object-cover" />
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">
+                Beauty Rooted in Nature
+              </h1>
+              <p className="text-xl max-w-3xl mx-auto text-gray-200">
+                At Sheady, we're revolutionizing skincare with pure, organic ingredients that heal and nourish.
+              </p>
+              <div className="flex justify-center mt-10 gap-4">
+                <Link
+                  to="/product"
+                  className="bg-[#ec8733] hover:bg-[#d86620] text-white px-8 py-3 rounded-md font-medium transition-colors duration-200"
+                >
+                  Shop Products
+                </Link>
+                <Link
+                  to="/contact"
+                  className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-md font-medium hover:bg-white hover:text-[#1b5059] transition-colors duration-200"
+                >
+                  Contact Us
+                </Link>
+              </div>
             </motion.div>
-            <div>
-              <h3 className="text-2xl font-bold mb-4">Why Sheady Exists</h3>
-              <p className="mb-3 text-sm text-gray-700">
-                Many Ghanaians struggle with stretch marks, aging skin, dark spots, and harsh chemical reactions. Sheady provides pure, organic solutions made from shea butter, neem, carrot oil, honey, and sunflower oil—crafted to heal and rejuvenate.
-              </p>
-              <p className="text-sm text-gray-700">
-                Our products help reduce stretch marks, promote hair growth, clear skin tone, and support anti-aging—all while being 100% chemical free.
-              </p>
+          </div>
+        </section>
+
+        {/* Brand Story */}
+        <section className="py-20 px-6 bg-white">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-16 items-center">
+              <motion.div 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                className="relative"
+              >
+                <div className="absolute -inset-4 bg-[#ec8733]/10 rounded-xl"></div>
+                <video
+                  controls
+                  className="relative rounded-lg shadow-xl w-full h-auto"
+                  poster={about1}
+                >
+                  <source src={Vid} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <h2 className="text-3xl font-bold mb-6 text-[#1b5059]">Our Philosophy</h2>
+                <p className="text-gray-700 mb-4 leading-relaxed">
+                  In a market saturated with synthetic solutions, Sheady stands apart by returning to nature's original remedies. 
+                  Each product is crafted from ethically-sourced shea butter and organic botanicals, preserving their healing 
+                  properties through traditional methods.
+                </p>
+                <p className="text-gray-700 leading-relaxed">
+                  We believe true beauty comes from harmony with nature, not from fighting against it with harsh chemicals.
+                </p>
+                <div className="mt-8 grid grid-cols-2 gap-4">
+                  <div className="p-4 bg-[#f8f8f8] rounded-lg">
+                    <h4 className="font-semibold text-[#1b5059]">100% Organic</h4>
+                    <p className="text-sm text-gray-600">No synthetic additives</p>
+                  </div>
+                  <div className="p-4 bg-[#f8f8f8] rounded-lg">
+                    <h4 className="font-semibold text-[#1b5059]">Locally Sourced</h4>
+                    <p className="text-sm text-gray-600">Supporting Ghanaian producers</p>
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </div>
-        </div>
+        </section>
+
+        {/* Mission Section */}
+        <section className="py-20 px-6 bg-[#f9f9f9]">
+          <div className="max-w-6xl mx-auto">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-3xl font-bold mb-4 text-[#1b5059]">Why We Exist</h2>
+              <p className="text-gray-600 max-w-3xl mx-auto">
+                Sheady was born from a need for authentic, effective skincare that honors both people and planet.
+              </p>
+            </motion.div>
+            
+            <div className="grid md:grid-cols-2 gap-10 items-center">
+              <div className="space-y-6">
+                <div className="flex items-start">
+                  <div className="bg-[#ec8733] rounded-full p-2 mr-4 flex-shrink-0">
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2 text-[#1b5059]">Solving Real Problems</h3>
+                    <p className="text-gray-700">
+                      We address common concerns like stretch marks, hair loss, and skin irritation with natural solutions that actually work.
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start">
+                  <div className="bg-[#ec8733] rounded-full p-2 mr-4 flex-shrink-0">
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2 text-[#1b5059]">Empowering Communities</h3>
+                    <p className="text-gray-700">
+                      Our business model creates sustainable income for women in northern Ghana through ethical shea butter production.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <motion.img
+                src={about1}
+                alt="Natural Ingredients"
+                className="rounded-xl shadow-md w-full h-auto"
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
+              />
+            </div>
+          </div>
+        </section>
 
         {/* Impact Section */}
-        <div className="bg-[#1b5059] text-white py-20 px-6">
-          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h3 className="text-3xl font-bold mb-4">Making a Difference</h3>
-              <ul className="space-y-4 text-sm">
-                <li>
-                  <strong>🌍 Community Empowerment:</strong> Women in northern Ghana find income opportunities through shea processing.
-                </li>
-                <li>
-                  <strong>💼 Job Creation:</strong> Our growth helps support over 200 distributors and workers.
-                </li>
-                <li>
-                  <strong>🌱 Economic Diversification:</strong> We contribute to reducing dependency on imported cosmetics.
-                </li>
-              </ul>
+        <section className="py-20 px-6 bg-[#1b5059] text-white">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <h2 className="text-3xl font-bold mb-6">Our Social Impact</h2>
+                <div className="space-y-6">
+                  <div className="flex items-start">
+                    <div className="text-2xl mr-4">🌱</div>
+                    <div>
+                      <h3 className="font-semibold text-lg mb-1">Sustainable Sourcing</h3>
+                      <p className="text-gray-300">
+                        Partnering with local shea nut collectors to promote sustainable harvesting practices.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="text-2xl mr-4">💼</div>
+                    <div>
+                      <h3 className="font-semibold text-lg mb-1">Economic Empowerment</h3>
+                      <p className="text-gray-300">
+                        Creating jobs for over 200 distributors and supporting women-led cooperatives.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="text-2xl mr-4">🌍</div>
+                    <div>
+                      <h3 className="font-semibold text-lg mb-1">Local Production</h3>
+                      <p className="text-gray-300">
+                        Reducing reliance on imported cosmetics by making premium products in Ghana.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+              
+              <motion.img
+                src={about2}
+                alt="Community Impact"
+                className="rounded-xl shadow-lg w-full h-auto"
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+              />
             </div>
-            <motion.img
-              src={about2}
-              alt="Community Impact"
-              className="rounded-xl shadow-lg w-full h-auto"
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
-            />
           </div>
-        </div>
-
-        <Testimonial />
+        </section>
 
         {/* Team Section */}
-        <div className="bg-[#fdf6f0] py-20 px-6">
-          <div className="max-w-6xl mx-auto text-center">
-            <h3 className="text-3xl font-bold mb-10 text-[#1b5059]">Meet Our Team</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+        <section className="py-20 px-6 bg-white">
+          <div className="max-w-6xl mx-auto">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-3xl font-bold mb-4 text-[#1b5059]">Meet The Team</h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                The passionate individuals behind Sheady's mission to bring natural beauty to everyone.
+              </p>
+            </motion.div>
+            
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 { name: "Shahadu Abdul Ganiu", role: "Marketing Lead", img: team1 },
                 { name: "Abdullah Mohammed", role: "Media & Graphics", img: team2 },
@@ -134,25 +237,31 @@ const About = () => {
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex flex-col items-center text-center"
+                  transition={{ delay: index * 0.1, duration: 0.5 }}
+                  className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
                 >
-                  <img
-                    src={member.img}
-                    alt={member.name}
-                    className="w-36 h-36 object-cover rounded-full border-4 border-[#1b5059] shadow-md hover:scale-105 transition-transform duration-300"
-                  />
-                  <p className="mt-3 font-semibold text-[#1b5059] text-sm">{member.name}</p>
-                  <p className="text-xs text-gray-500">{member.role}</p>
+                  <div className="aspect-square overflow-hidden">
+                    <img
+                      src={member.img}
+                      alt={member.name}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="p-6 text-center">
+                    <h3 className="font-bold text-lg text-[#1b5059]">{member.name}</h3>
+                    <p className="text-gray-600 mt-1">{member.role}</p>
+                  </div>
                 </motion.div>
               ))}
             </div>
           </div>
-        </div>
+        </section>
 
-      </section>
+        <Testimonial />
+      </main>
+
       <Footer />
-    </>
+    </div>
   );
 };
 

@@ -51,15 +51,15 @@ const CategorySection = () => {
             </div>
 
             {/* Title */}
-            <h3 className="text-[16px] font-semibold">{category.title}</h3>
+            <h3 className="text-[18px] font-semibold">{category.title}</h3>
 
             {/* Description */}
-            <p className="text-xs text-gray-500 mt-1 mb-1">{category.description}</p>
+            <p className="text-sm text-gray-500 mt-1 mb-1">{category.description}</p>
 
             {/* Link */}
             <Link
               to={category.link}
-              className="text-sm text-[#1b5059] uppercase inline-block tracking-wide"
+              className="text-md text-[#1b5059] uppercase inline-block tracking-wide"
             >
               Shop Now ↗
             </Link>

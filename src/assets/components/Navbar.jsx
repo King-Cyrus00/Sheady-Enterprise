@@ -5,96 +5,73 @@ import logo from "../images/sheady-logo.png";
 import { Link, useNavigate, useLocation } from "react-router";
 import { CartContext } from "../Content/Cart";
 import CartModal from "../components/CartModal"; 
-import soap from "../images/soap.jpg";
-import skin from "../images/skin.jpg";  
-import hair from "../images/hair.jpg";
-import p1 from "../images/p1.jpg"; 
-
-const categories = [
-  {
-    name: "All Products",
-    value: "All",
-    image: soap,
-  },
-  {
-    name: "Skin Care",
-    value: "Skin Care",
-    image: skin,
-  },
-  {
-    name: "Hair Care",
-    value: "Hair Care",
-    image: hair,
-  },
-  {
-    name: "Soap",
-    value: "Soap",
-    image: p1,
-  },
-];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false); 
+  const [searchQuery, setSearchQuery] = useState("");
   const { cartCount } = useContext(CartContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleCategoryClick = (categoryValue) => {
-    const url = categoryValue === "All"
-      ? "/product"
-      : `/product?category=${encodeURIComponent(categoryValue)}`;
-    navigate(url);
-    setDropdownOpen(false);
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/product?search=${encodeURIComponent(searchQuery)}`);
+    }
   };
 
+  // Close mobile menu when navigating
   useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (!e.target.closest(".category-dropdown")) {
-        setDropdownOpen(false);
-      }
-    };
-    window.addEventListener("click", handleClickOutside);
-    return () => window.removeEventListener("click", handleClickOutside);
-  }, []);
+    setIsOpen(false);
+  }, [location.pathname]);
 
   return (
-    <header className="w-full bg-white shadow-sm font-[Montserrat] relative z-50">
+    <header className="w-full bg-white shadow-sm font-[Montserrat] relative z-50 sticky top-0">
       {/* Top Bar */}
       <div className="bg-[#f9f4f0] text-sm text-gray-700 px-6 py-2 flex justify-between items-center">
-        <div>Sophistication Meets Uncompromised Elegance</div>
+        <div className="text-gray-600">Sophistication Meets Uncompromised Elegance</div>
 
         <div className="flex items-center space-x-5">
-          <div className="hidden md:flex items-center border border-gray-300 px-2 py-1 rounded-full">
-            <FiSearch className="mr-2" />
+          <form onSubmit={handleSearch} className="hidden md:flex items-center border border-gray-300 px-3 py-1.5 rounded-full transition-all focus-within:border-[#ec8733] focus-within:ring-1 focus-within:ring-[#ec8733]">
+            <FiSearch className="mr-2 text-gray-500" />
             <input
               type="text"
-              placeholder="Search here..."
-              className="outline-none text-sm bg-transparent placeholder-gray-500"
+              placeholder="Search products..."
+              className="outline-none text-sm bg-transparent placeholder-gray-500 w-40"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
-          </div>
+          </form>
 
-          <a
-            href="#"
-            className="text-sm hover:text-[#ec8733] hidden md:inline font-medium"
+          <Link
+            to="/stores"
+            className="text-sm hover:text-[#ec8733] hidden md:inline font-medium transition-colors"
           >
             Find a store
-          </a>
+          </Link>
 
           <div
-            className="relative cursor-pointer"
+            className="relative cursor-pointer group"
             onClick={() => setIsCartOpen(true)}
             title="View Cart"
           >
-            <FiShoppingCart size={20} className="hover:text-[#ec8733]" />
+            <FiShoppingCart size={20} className="hover:text-[#ec8733] transition-colors" />
             {cartCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-[#ec8733] text-white text-[10px] px-1.5 py-[1px] rounded-full">
+              <span className="absolute -top-2 -right-2 bg-[#ec8733] text-white text-xs h-4 min-w-[16px] flex items-center justify-center rounded-full">
                 {cartCount}
               </span>
             )}
+            <span className="absolute hidden group-hover:block -right-2 top-full mt-2 bg-gray-800 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
+              View Cart
+            </span>
           </div>
 
-          <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
+          <button 
+            className="md:hidden text-gray-700 hover:text-[#ec8733] transition-colors" 
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+          >
             {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
           </button>
         </div>
@@ -105,52 +82,39 @@ const Navbar = () => {
           <img
             src={logo}
             alt="Sheady Logo"
-            className="h-10 w-auto object-contain cursor-pointer"
+            className="h-10 w-auto object-contain cursor-pointer hover:opacity-90 transition-opacity"
           />
         </Link>
 
-        <nav className="hidden md:flex space-x-6 text-sm font-medium uppercase tracking-wide text-gray-800 relative">
-          <Link to="/about" className="hover:text-[#ec8733]">About</Link>
-
-          <div
-            className="relative category-dropdown"
-            onClick={(e) => {
-              e.stopPropagation();
-              setDropdownOpen(!dropdownOpen);
-            }}
-          >
-            <button className="hover:text-[#ec8733]">CATEGORIES</button>
-            {dropdownOpen && (
-              <div className="absolute top-full left-0 mt-2 w-56 bg-white shadow-lg rounded-md p-3 space-y-2 z-50">
-                {categories.map((cat) => (
-                  <div
-                    key={cat.value}
-                    className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-[#fdf6f0] cursor-pointer transition"
-                    onClick={() => handleCategoryClick(cat.value)}
-                  >
-                    <img
-                      src={cat.image}
-                      alt={cat.name}
-                      className="w-8 h-8 rounded-full object-cover border"
-                    />
-                    <span className="text-sm text-[#1b5059] font-medium">{cat.name}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <Link to="/product" className="hover:text-[#ec8733]">Shop</Link>
-          <Link to="/blogs" className="hover:text-[#ec8733]">Blogs</Link>
-          <Link to="/contact" className="hover:text-[#ec8733]">Contact</Link>
+        <nav className="hidden md:flex space-x-6 text-sm font-medium uppercase tracking-wide text-gray-800">
+          <Link to="/" className="hover:text-[#ec8733] transition-colors py-1">Home</Link>
+          <Link to="/product" className="hover:text-[#ec8733] transition-colors py-1">Shop</Link>
+          <Link to="/about" className="hover:text-[#ec8733] transition-colors py-1">About</Link>
+          <Link to="/blogs" className="hover:text-[#ec8733] transition-colors py-1">Blogs</Link>
+          <Link to="/contact" className="hover:text-[#ec8733] transition-colors py-1">Contact</Link>
         </nav>
       </div>
 
+      {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white px-6 py-4 space-y-4 shadow-md">
-          <Link to="/about" className="block text-sm font-medium uppercase text-gray-800 hover:text-[#ec8733]">About</Link>
-          <Link to="/product" className="block text-sm font-medium uppercase text-gray-800 hover:text-[#ec8733]">Shop</Link>
-          <Link to="/contact" className="block text-sm font-medium uppercase text-gray-800 hover:text-[#ec8733]">Contact</Link>
+        <div className="md:hidden bg-white px-6 py-4 space-y-4 shadow-md border-t border-gray-100">
+          <form onSubmit={handleSearch} className="flex items-center border border-gray-300 px-3 py-2 rounded-full w-full">
+            <FiSearch className="mr-2 text-gray-500" />
+            <input
+              type="text"
+              placeholder="Search products..."
+              className="outline-none text-sm bg-transparent placeholder-gray-500 w-full"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </form>
+          
+          <Link to="/" className="block text-sm font-medium uppercase text-gray-800 hover:text-[#ec8733] transition-colors py-2">Home</Link>
+          <Link to="/product" className="block text-sm font-medium uppercase text-gray-800 hover:text-[#ec8733] transition-colors py-2">Shop</Link>
+          <Link to="/about" className="block text-sm font-medium uppercase text-gray-800 hover:text-[#ec8733] transition-colors py-2">About</Link>
+          <Link to="/blogs" className="block text-sm font-medium uppercase text-gray-800 hover:text-[#ec8733] transition-colors py-2">Blogs</Link>
+          <Link to="/contact" className="block text-sm font-medium uppercase text-gray-800 hover:text-[#ec8733] transition-colors py-2">Contact</Link>
+          <Link to="/stores" className="block text-sm font-medium uppercase text-gray-800 hover:text-[#ec8733] transition-colors py-2">Find a store</Link>
         </div>
       )}
 
