@@ -13,7 +13,7 @@ import T6 from "../images/T6.jpg";
 import T7 from "../images/T7.jpg";
 import T8 from "../images/T8.jpg";
 import T9 from "../images/T9.jpg";
-import T10 from "../images/T10.jpg";
+import T10 from "../images/T10.jpeg";
 import T11 from "../images/T11.jpg";
 import T12 from "../images/T12.jpg";
 import T13 from "../images/T13.jpg";

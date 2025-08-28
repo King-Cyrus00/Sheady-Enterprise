@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { CartContext } from "../Content/Cart";
 import { FaTimes, FaTrashAlt } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { toast } from "react-hot-toast";
 import { Phone, MessageCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,21 +9,16 @@ import "@fontsource/montserrat";
 
 const CartModal = ({ isOpen, onClose }) => {
   const { cartItems, removeFromCart } = useContext(CartContext);
+  const navigate = useNavigate();
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
 
-  const handleCheckoutClick = () => {
-    toast("Complete your order via WhatsApp or phone", {
-      position: "bottom-center",
-      style: {
-        background: "#1b5059",
-        color: "white",
-        borderRadius: "12px",
-      },
-      icon: "📱",
-    });
+  const handleCheckout = () => {
+    localStorage.setItem("orderData", JSON.stringify({ cartItems, subtotal }));
+    navigate("/payment");
+    onClose(); 
   };
 
   return (
@@ -142,7 +137,7 @@ const CartModal = ({ isOpen, onClose }) => {
 
                 <div className="space-y-3">
                   <button
-                    onClick={handleCheckoutClick}
+                    onClick={handleCheckout}
                     className="w-full bg-[#1b5059] text-white py-3 rounded-lg font-medium hover:bg-[#0d2e34] transition"
                   >
                     Proceed to Checkout

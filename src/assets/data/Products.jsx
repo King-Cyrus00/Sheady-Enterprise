@@ -2,7 +2,10 @@ import p1 from "../images/p1.jpg";
 import p2 from "../images/p2.jpg";
 import Hair from "../images/hair.jpg";
 import Skin from "../images/skin.jpg";
-import gel from "../images/gel.png"
+import gel from "../images/gel.png";
+import tumeric from '../images/tumeric.jpeg';
+import oil from '../images/oil.jpeg';
+import grow from '../images/conditioner.jpeg'
 
 
 const products = [
@@ -58,7 +61,7 @@ const products = [
     name: "Tumeric Shea Butter",
     description: "Revitalize your skin with our Tumeric Shea Butter, enriched with natural antioxidants for a radiant glow.",
     price: 35.00,
-    image: Skin,
+    image: tumeric,
     category: "Skin Care",
     size: "",
   },
@@ -71,32 +74,32 @@ const products = [
     category: "Hair Care",
     size: "400ml",
   },
-  // {
-  //   id: 8,
-  //   name: "Shea Butter Baby Cream",
-  //   description: "Gentle cream for babies' sensitive skin, fragrance-free.",
-  //   price: 30.00,
-  //   image: p2,
-  //   category: "Soap",
-  //   size: "100ml",
-  // },
-  // {
-  //   id: 9,
-  //   name: "Shea Butter Beard Balm",
-  //   description: "Tame and condition your beard with our shea-rich formula.",
-  //   price: 30.00,
-  //   image: Hair,
-  //   category: "Hair Care",
-  //   size: "50g",
-  // },
+  {
+    id: 8,
+    name: "Hair Growth Oil",
+    description: "Natural hair growth oil with essential nutrients for healthy, strong hair.",
+    price: 35.00,
+    image: oil,
+    category: "Hair Care",
+    size: "50ml",
+  },
+  {
+    id: 9,
+    name: "Grow Secret",
+    description: "Nourishing conditioner that promotes hair growth and shine.",
+    price: 35.00,
+    image: grow,
+    category: "Skin Care",
+    size: "400ml",
+  },
   // {
   //   id: 10,
-  //   name: "Shea Butter Soap Bar",
-  //   description: "Cold-processed soap bar for smooth, clean, and soft skin.",
-  //   price: 30.00,
-  //   image: p2,
-  //   category: "Soap",
-  //   size: "100g",
+  //   name: "Glow Secret",
+  //   description: "The secret to perfect skin: cleanse, moisturize, and glow naturally.",
+  //   price: 35.00,
+  //   image: Skin,
+  //   category: "Skin Care",
+  //   size: "",
   // },
 ];
 

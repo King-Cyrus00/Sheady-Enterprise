@@ -7,47 +7,58 @@ import About from "./assets/pages/About";
 import Contact from "./assets/pages/Contact";
 import Product from "./assets/pages/Product";
 import ErrorPage from "./assets/pages/ErrorPage";
+import Payment from "./assets/components/payment";
 
 const sheadyRouter = createBrowserRouter([
-  { 
-    path: "/", 
+  {
+    path: "/",
     element: (
       <>
         <ScrollToTop />
         <Home />
       </>
-    ) 
+    )
   },
-  { 
-    path: "/about", 
+  {
+    path: "/about",
     element: (
       <>
         <ScrollToTop />
         <About />
       </>
-    ) 
+    )
   },
-  { 
-    path: "/contact", 
+  {
+    path: "/contact",
     element: (
       <>
         <ScrollToTop />
         <Contact />
       </>
-    ) 
+    )
   },
-  { 
-    path: "/product", 
+
+  {
+    path: "/payment",
+    element: (
+      <>
+        <ScrollToTop />
+        <Payment />
+      </>
+    )
+  },
+  {
+    path: "/product",
     element: (
       <>
         <ScrollToTop />
         <Product />
       </>
-    ) 
+    )
   },
-  { 
-    path: "*", 
-    element: <ErrorPage /> 
+  {
+    path: "*",
+    element: <ErrorPage />
   },
 ]);
 
