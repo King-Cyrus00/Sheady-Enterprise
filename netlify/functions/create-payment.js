@@ -16,11 +16,20 @@ export async function handler(event, context) {
 
     const providerCode = providerMap[provider];
     if (!providerCode) {
+      console.error("❌ Unsupported provider:", provider);
       return {
         statusCode: 400,
         body: JSON.stringify({ error: "Unsupported provider", provider }),
       };
     }
+
+    // Debug: log request going to Hubtel
+    console.log("📦 Payment request:", {
+      amount,
+      phoneNumber,
+      provider,
+      mappedProvider: providerCode,
+    });
 
     // Prepare Basic Auth header
     const credentials = Buffer.from(
@@ -48,6 +57,8 @@ export async function handler(event, context) {
 
     // Read safely: try JSON, otherwise return text
     const text = await response.text();
+    console.log("📨 Hubtel raw response:", text);
+
     let data;
     try {
       data = JSON.parse(text);
@@ -60,10 +71,13 @@ export async function handler(event, context) {
       body: JSON.stringify(data),
     };
   } catch (error) {
-    console.error("Payment error:", error);
+    console.error(" Payment error:", error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "Payment initiation failed", details: error.message }),
+      body: JSON.stringify({
+        error: "Payment initiation failed",
+        details: error.message,
+      }),
     };
   }
 }
