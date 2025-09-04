@@ -59,7 +59,7 @@ export async function handler(event, context) {
       Amount: amount,
       PrimaryCallbackUrl:
         process.env.HUBTEL_CALLBACK_URL ||
-        "https://webhook.site/your-test-id", // 🔄 replace later with Netlify callback fn
+        "https://sheady.netlify.app/.netlify/functions/payment-callback", // 🔄 replace later with Netlify callback fn
       Description: `Payment of GHS ${amount}`,
       ClientReference: "order-" + Date.now(),
     };
