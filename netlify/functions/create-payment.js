@@ -39,14 +39,22 @@ export async function handler(event, context) {
           amount,
           description: "Order payment",
           clientReference: "order-" + Date.now(),
-          customerMsisdn: phoneNumber,   // 👈 user phone with 233 prefix
-          provider: providerCode,        // 👈 mapped provider
-          primaryCallbackUrl: "https://webhook.site/your-test-id", // replace with your real webhook later
+          customerMsisdn: phoneNumber,   // must be in 233xxxxxxxxx format
+          provider: providerCode,
+          primaryCallbackUrl: "https://webhook.site/your-test-id", // temporary for testing
         }),
       }
     );
 
-    const data = await response.json();
+    // Read safely: try JSON, otherwise return text
+    const text = await response.text();
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      data = { raw: text };
+    }
+
     return {
       statusCode: response.status,
       body: JSON.stringify(data),
@@ -55,7 +63,7 @@ export async function handler(event, context) {
     console.error("Payment error:", error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "Payment initiation failed" }),
+      body: JSON.stringify({ error: "Payment initiation failed", details: error.message }),
     };
   }
 }
