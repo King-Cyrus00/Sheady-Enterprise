@@ -26,26 +26,26 @@ const PaymentPage = () => {
   };
 
   const paymentMethods = [
-    { 
-      id: "mtn", 
-      name: "MTN MoMo", 
+    {
+      id: "mtn",
+      name: "MTN MoMo",
       image: Mtn,
-      bgColor: "bg-yellow-50", 
-      borderColor: "border-yellow-200" 
+      bgColor: "bg-yellow-50",
+      borderColor: "border-yellow-200"
     },
-    { 
-      id: "telecel", 
-      name: "Telecel Cash", 
+    {
+      id: "telecel",
+      name: "Telecel Cash",
       image: Telecel,
-      bgColor: "bg-red-50", 
-      borderColor: "border-red-200" 
+      bgColor: "bg-red-50",
+      borderColor: "border-red-200"
     },
-    { 
-      id: "airteltigo", 
-      name: "AirtelTigo Cash", 
+    {
+      id: "airteltigo",
+      name: "AirtelTigo Cash",
       image: AirtelTigo,
-      bgColor: "bg-red-50", 
-      borderColor: "border-red-200" 
+      bgColor: "bg-red-50",
+      borderColor: "border-red-200"
     }
   ];
 
@@ -64,6 +64,7 @@ const PaymentPage = () => {
   const handlePayment = async (e) => {
     e.preventDefault();
     const cleanPhone = phone.replace(/\D/g, '');
+
     if (cleanPhone.length !== 9) {
       showNotification("error", "Invalid Phone Number", "Please enter a valid 9-digit phone number");
       return;
@@ -71,41 +72,53 @@ const PaymentPage = () => {
 
     setLoading(true);
     showNotification("info", "Processing Payment", "Sending payment request to your phone...");
-    
-    // Simulate Hubtel API call
-    setTimeout(() => {
+
+    try {
+      const res = await fetch("/.netlify/functions/create-payment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: subtotal + 10, // total with delivery
+          phoneNumber: "233" + cleanPhone, // Hubtel expects country code
+          provider: selectedMethod, // mtn, airteltigo, telecel
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setLoading(false);
+        showNotification("success", "Payment Request Sent", "Check your phone and approve the transaction.");
+      } else {
+        setLoading(false);
+        showNotification("error", "Payment Failed", data?.message || "Something went wrong");
+      }
+    } catch (err) {
+      console.error(err);
       setLoading(false);
-      showNotification("success", "Payment Request Sent", "Please check your phone and enter your PIN to authorize payment");
-    }, 3000);
+      showNotification("error", "Error", "Failed to connect to payment server");
+    }
   };
 
-  if (!orderData) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-        <p className="text-gray-600 text-lg">No order found. Please add items to your cart.</p>
-      </div>
-    );
-  }
 
-  const { cartItems, subtotal } = orderData;
+  const cartItems = orderData?.cartItems || [];
+  const subtotal = orderData?.subtotal || 0;
+
 
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-4 md:px-8 lg:px-16 font-montserrat">
       {/* Notification Toast */}
       {notification && (
-        <div className={`fixed top-4 right-4 max-w-sm w-full z-50 transform transition-all duration-300 ${
-          notification ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
-        }`}>
-          <div className={`rounded-lg shadow-lg p-4 flex items-start gap-3 ${
-            notification.type === 'success' ? 'bg-green-50 border border-green-200' :
-            notification.type === 'error' ? 'bg-red-50 border border-red-200' :
-            'bg-blue-50 border border-blue-200'
+        <div className={`fixed top-4 right-4 max-w-sm w-full z-50 transform transition-all duration-300 ${notification ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
           }`}>
-            <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
-              notification.type === 'success' ? 'bg-green-500' :
-              notification.type === 'error' ? 'bg-red-500' :
-              'bg-blue-500'
+          <div className={`rounded-lg shadow-lg p-4 flex items-start gap-3 ${notification.type === 'success' ? 'bg-green-50 border border-green-200' :
+            notification.type === 'error' ? 'bg-red-50 border border-red-200' :
+              'bg-blue-50 border border-blue-200'
             }`}>
+            <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${notification.type === 'success' ? 'bg-green-500' :
+              notification.type === 'error' ? 'bg-red-500' :
+                'bg-blue-500'
+              }`}>
               <span className="text-white text-xs font-bold">
                 {notification.type === 'success' ? '✓' : notification.type === 'error' ? '!' : 'i'}
               </span>
@@ -114,7 +127,7 @@ const PaymentPage = () => {
               <p className="text-sm font-medium text-gray-900">{notification.title}</p>
               <p className="text-xs text-gray-600 mt-0.5">{notification.message}</p>
             </div>
-            <button 
+            <button
               onClick={() => setNotification(null)}
               className="text-gray-400 hover:text-gray-600"
             >
@@ -126,7 +139,7 @@ const PaymentPage = () => {
 
       <div className="max-w-5xl mx-auto">
         {/* Back Button */}
-        <button 
+        <button
           onClick={() => window.history.back()}
           className="flex items-center gap-2 text-gray-600 hover:text-gray-900 font-medium mb-6 transition-colors duration-200 group"
         >
@@ -161,11 +174,10 @@ const PaymentPage = () => {
                     {paymentMethods.map((method) => (
                       <label
                         key={method.id}
-                        className={`flex items-center p-4 rounded-xl border-2 cursor-pointer transition-all ${
-                          selectedMethod === method.id
-                            ? `${method.borderColor} ${method.bgColor} border-[#1b5059]`
-                            : "border-gray-200 hover:border-gray-300"
-                        }`}
+                        className={`flex items-center p-4 rounded-xl border-2 cursor-pointer transition-all ${selectedMethod === method.id
+                          ? `${method.borderColor} ${method.bgColor} border-[#1b5059]`
+                          : "border-gray-200 hover:border-gray-300"
+                          }`}
                       >
                         <input
                           type="radio"
@@ -225,7 +237,7 @@ const PaymentPage = () => {
                     <div>
                       <p className="text-sm font-medium text-blue-900">Payment Process</p>
                       <p className="text-xs text-blue-700 mt-1">
-                        After clicking "Pay Now", you'll receive a prompt on your phone. 
+                        After clicking "Pay Now", you'll receive a prompt on your phone.
                         Enter your PIN to authorize this payment.
                       </p>
                     </div>
