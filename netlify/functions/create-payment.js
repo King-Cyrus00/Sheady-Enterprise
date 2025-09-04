@@ -48,21 +48,20 @@ export async function handler(event, context) {
       `${process.env.HUBTEL_API_ID}:${process.env.HUBTEL_API_KEY}`
     ).toString("base64");
 
-    // ✅ Hubtel Online Checkout API (works with your key scope)
-    const url =
-      "https://payproxyapi.hubtel.com/merchantaccount/onlinecheckout/initiate";
+    // ✅ Hubtel Receive Payment API
+    const url = `https://payproxyapi.hubtel.com/merchantaccount/merchants/${process.env.HUBTEL_MERCHANT_ID}/receive/mobilemoney`;
 
     const payload = {
-      amount,
-      description: `Payment of GHS ${amount}`,
-      clientReference: "order-" + Date.now(),
-      customerMsisdn: phoneNumber, // must be 233xxxxxxxxx
-      customerName: customerName || "Anonymous",
-      customerEmail: customerEmail || "noemail@example.com",
-      provider: providerCode,
-      primaryCallbackUrl:
+      CustomerName: customerName || "Anonymous",
+      CustomerMsisdn: phoneNumber,
+      CustomerEmail: customerEmail || "noemail@example.com",
+      Channel: providerCode,
+      Amount: amount,
+      PrimaryCallbackUrl:
         process.env.HUBTEL_CALLBACK_URL ||
-        "https://webhook.site/your-test-id", // 🔄 replace with your Netlify callback fn later
+        "https://webhook.site/your-test-id", // 🔄 replace later with Netlify callback fn
+      Description: `Payment of GHS ${amount}`,
+      ClientReference: "order-" + Date.now(),
     };
 
     const response = await fetch(url, {
