@@ -43,13 +43,27 @@ export async function handler(event, context) {
       mappedProvider: providerCode,
     });
 
-    // ✅ Prepare Basic Auth header
+    // ✅ Prepare Basic Auth header (API ID + API Key)
     const credentials = Buffer.from(
       `${process.env.HUBTEL_API_ID}:${process.env.HUBTEL_API_KEY}`
     ).toString("base64");
 
-    // ✅ Use Receive Payment API
-    const url = `https://rmp.hubtel.com/merchantaccount/merchants/${process.env.HUBTEL_MERCHANT_ID}/receive/mobilemoney`;
+    // ✅ Hubtel Online Checkout API (works with your key scope)
+    const url =
+      "https://payproxyapi.hubtel.com/merchantaccount/onlinecheckout/initiate";
+
+    const payload = {
+      amount,
+      description: `Payment of GHS ${amount}`,
+      clientReference: "order-" + Date.now(),
+      customerMsisdn: phoneNumber, // must be 233xxxxxxxxx
+      customerName: customerName || "Anonymous",
+      customerEmail: customerEmail || "noemail@example.com",
+      provider: providerCode,
+      primaryCallbackUrl:
+        process.env.HUBTEL_CALLBACK_URL ||
+        "https://webhook.site/your-test-id", // 🔄 replace with your Netlify callback fn later
+    };
 
     const response = await fetch(url, {
       method: "POST",
@@ -57,16 +71,7 @@ export async function handler(event, context) {
         Authorization: `Basic ${credentials}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        CustomerName: customerName || "Anonymous",
-        CustomerMsisdn: phoneNumber,
-        CustomerEmail: customerEmail || "noemail@example.com",
-        Channel: providerCode,
-        Amount: amount,
-        PrimaryCallbackUrl: "https://webhook.site/your-test-id", // 🔄 replace with your real callback later
-        Description: `Payment of GHS ${amount}`, // ✅ dynamic description
-        ClientReference: "order-" + Date.now(),
-      }),
+      body: JSON.stringify(payload),
     });
 
     // ✅ Read response safely
